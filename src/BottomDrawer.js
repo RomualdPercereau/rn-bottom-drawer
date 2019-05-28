@@ -117,7 +117,6 @@ export default class BottomDrawer extends Component {
   }
 
   hideBottomDrawer(hide) {
-    this.animator.test("oui oui")
     if (hide) {
       this.animator.hideTemporarily()
     } else {
