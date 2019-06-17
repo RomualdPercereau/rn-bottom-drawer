@@ -52,7 +52,8 @@ export default class Animator extends Component {
     ) {
       this._transitionTo(this.props.upPosition, this.props.onExpanded)
     } else {
-      this._resetPosition()
+      this._transitionTo(this.props.upPosition, this.props.onExpanded)
+      //this._resetPosition()
     }
   }
 
