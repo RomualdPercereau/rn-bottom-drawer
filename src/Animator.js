@@ -1,9 +1,6 @@
 import React, { Component } from "react"
 import { PanResponder, Animated, Dimensions, StyleSheet } from "react-native"
 
-const SCREEN_HEIGHT = Dimensions.get("window").height
-const SCREEN_WIDTH = Dimensions.get("window").width
-
 export default class Animator extends Component {
   constructor(props) {
     super(props)
@@ -23,7 +20,12 @@ export default class Animator extends Component {
         style={[
           { ...this.position.getLayout(), left: 0 },
           StyleSheet.flatten([
-            styles.animationContainer(this.props.containerHeight, this.props.backgroundColor),
+            styles.animationContainer(
+              this.props.containerHeight,
+              this.props.backgroundColor,
+              this.props.screenWidth,
+              this.props.screenHeight
+            ),
             styles.roundedEdges(this.props.roundedEdges),
             styles.shadow(this.props.shadow)
           ])
@@ -63,7 +65,7 @@ export default class Animator extends Component {
   }
 
   _calculateEase(gesture) {
-    return Math.min(Math.sqrt(gesture.dy * -1), Math.sqrt(SCREEN_HEIGHT))
+    return Math.min(Math.sqrt(gesture.dy * -1), Math.sqrt(this.props.screenHeight))
   }
 
   _transitionTo(position, callback) {
@@ -83,16 +85,16 @@ export default class Animator extends Component {
 
   hideTemporarily() {
     Animated.spring(this.position, {
-      toValue: this.props.hidePosition
+      toValue: this.props.hidePosition + 10
     }).start()
   }
 }
 
 const styles = {
-  animationContainer: (height, color) => ({
-    width: SCREEN_WIDTH,
+  animationContainer: (height, color, screenWidth, screenHeight) => ({
+    width: screenWidth,
     position: "absolute",
-    height: height + Math.sqrt(SCREEN_HEIGHT),
+    height: height + Math.sqrt(screenHeight),
     backgroundColor: color
   }),
   roundedEdges: rounded => {
@@ -104,12 +106,10 @@ const styles = {
     )
   },
   shadow: shadow => {
-    return (
-      shadow == true && {
-        shadowColor: "#CECDCD",
-        shadowRadius: 3,
-        shadowOpacity: 5
-      }
-    )
+    return {
+      shadowColor: "#000000",
+      shadowRadius: 4,
+      shadowOpacity: 0.2
+    }
   }
 }
