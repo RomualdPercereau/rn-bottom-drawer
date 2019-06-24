@@ -109,7 +109,7 @@ const styles = {
     return {
       shadowColor: "#820931",
       shadowRadius: 4,
-      shadowOpacity: 0.2
+      shadowOpacity: 0.6
     }
   }
 }
