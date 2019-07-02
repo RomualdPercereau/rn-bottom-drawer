@@ -8,7 +8,15 @@ export default class Animator extends Component {
     this.position = new Animated.ValueXY(this.props.currentPosition)
 
     this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        const { dx, dy } = gestureState
+        return dx > 2 || dx < -2 || dy > 2 || dy < -2
+      },
+
+      onMoveShouldSetPanResponderCapture: (_, gestureState) => {
+        const { dx, dy } = gestureState
+        return dx > 2 || dx < -2 || dy > 2 || dy < -2
+      },
       onPanResponderMove: this._handlePanResponderMove,
       onPanResponderRelease: this._handlePanResponderRelease
     })
