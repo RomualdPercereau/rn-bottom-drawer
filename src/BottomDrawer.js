@@ -81,6 +81,7 @@ export default class BottomDrawer extends Component {
         hidePosition={this.HIDDEN_POSITION}
         roundedEdges={this.props.roundedEdges}
         containerHeight={this.props.containerHeight}
+        shadow={this.props.shadow}
         backgroundColor={this.props.backgroundColor}
         onExpanded={() => null}
         onCollapsed={() => null}
