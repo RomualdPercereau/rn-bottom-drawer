@@ -115,7 +115,7 @@ const styles = {
   },
   shadow: shadow => {
     return {
-      shadowColor: "#820931",
+      shadowColor: shadow,
       shadowRadius: 4,
       shadowOpacity: 0.6
     }
